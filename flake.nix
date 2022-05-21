@@ -9,19 +9,31 @@
 
   outputs = { nixpkgs, home-manager, ... }:
   let 
-    system = "x86_64-linux";
-
-    
-    pkgs = import pkgs {
-      inherit system;
-      config = { allowUnfree = true; };
+    pkgs = import nixpkgs {
+       inherit system;
+       config = { allowUnfree = true; };
     };
-  
+
+    system = "x86_64-linux";
     lib = nixpkgs.lib;
 
   in { 
+    homeManagerConfigurations = {
+      nini = home-manager.lib.homeManagerConfiguration {
+         inherit system pkgs;
+         username = "nini";
+         stateVersion = "21.11";
+         homeDirectory = "/home/nini";
+         configuration = { 
+            imports = [
+               ./users/nini/home.nix
+            ];
+         }; 
+      };
+    };
+
     nixosConfigurations = { 
-      testbox = lib.nixosSystem { 
+      nini = lib.nixosSystem { 
         inherit system;
 
         modules = [

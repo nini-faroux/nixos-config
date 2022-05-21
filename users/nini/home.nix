@@ -23,5 +23,8 @@
       zsh
       git
       tmux
+      ripgrep
+      google-chrome
+      neovim
   ];
 }

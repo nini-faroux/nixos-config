@@ -1,4 +1,5 @@
 #!/bin/sh
 pushd ~/.dotfiles
-home-manager switch -f ./users/nini/home.nix
+nix build .#homeManagerConfigurations.nini.activationPackage
+./result/activate
 popd
