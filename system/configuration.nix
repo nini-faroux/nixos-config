@@ -5,6 +5,11 @@
 { config, pkgs, ... }:
 
 {
+  nix = {
+    extraOptions = "experimental-features = nix-command flakes";
+    package = pkgs.nixFlakes;
+  };
+
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
