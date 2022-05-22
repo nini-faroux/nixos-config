@@ -26,5 +26,12 @@
       ripgrep
       google-chrome
       neovim
+      docker
+      docker-compose
   ];
+
+  # imports = [
+  #     config/tmux.conf.nix
+  # ];
+
 }

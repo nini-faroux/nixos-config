@@ -8,6 +8,9 @@
   nix = {
     extraOptions = "experimental-features = nix-command flakes";
     package = pkgs.nixFlakes;
+    binaryCaches = [ "https://hydra.iohk.io" "https://iohk.cachix.org" ];
+    binaryCachePublicKeys =
+    [ "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ=" "iohk.cachix.org-1:DpRUyj7h7V830dp/i6Nti+NEO2/nhblbov/8MW7Rqoo=" ];
   };
 
   imports =
@@ -21,6 +24,9 @@
 
   networking.hostName = "nini"; # Define your hostname.
   networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+  # Enable for docker daemon
+  virtualisation.docker.enable = true;
 
   # Set your time zone.
   time.timeZone = "Ireland/Dublin";
@@ -70,7 +76,10 @@
   users.users.nini = {
     isNormalUser = true;
     initialPassword = "pass";
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel" 
+      "docker"
+    ];
   };
 
   # List packages installed in system profile. To search, run:
@@ -85,9 +94,7 @@
   # started in user sessions.
   # programs.mtr.enable = true;
   # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  #   enable = true; enableSSHSupport = true; };
 
   # List services that you want to enable:
 
