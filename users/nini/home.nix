@@ -25,13 +25,12 @@
       tmux
       ripgrep
       google-chrome
-      neovim
       docker
       docker-compose
   ];
 
-  # imports = [
-  #     config/tmux.conf.nix
-  # ];
-
+  imports = [
+      ./config/tmux.nix
+      ./config/neovim.nix
+  ];
 }
