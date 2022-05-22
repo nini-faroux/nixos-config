@@ -50,17 +50,18 @@
   # };
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  # Use capslock for ctrl
+  services.xserver = {
+    enable = true;
+    layout = "gb";
+    xkbOptions = "ctrl:swapcaps, eurosign:e";
+  };
 
 
   # Enable the Plasma 5 Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
   
-
-  # Configure keymap in X11
-  services.xserver.layout = "us";
-  services.xserver.xkbOptions = "eurosign:e";
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
