@@ -27,6 +27,7 @@
       google-chrome
       docker
       docker-compose
+      glib
   ];
 
   imports = [
