@@ -76,11 +76,12 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.nini = {
     isNormalUser = true;
-    initialPassword = "pass";
+    shell = pkgs.zsh;
     extraGroups = [
       "wheel" 
       "docker"
     ];
+    initialPassword = "";
   };
 
   # List packages installed in system profile. To search, run:
