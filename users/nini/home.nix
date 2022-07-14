@@ -30,6 +30,7 @@
       docker-compose
       glib
       vscode
+      fd
   ];
   
   programs.zsh = {
