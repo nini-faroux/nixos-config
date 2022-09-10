@@ -27,8 +27,8 @@
          configuration = { 
             imports = [
                ./users/nini/home.nix
-	       ./users/nini/config/tmux.nix
-	       ./users/nini/config/neovim.nix
+	             ./users/nini/config/tmux.nix
+	             ./users/nini/config/neovim.nix
             ];
          }; 
       };

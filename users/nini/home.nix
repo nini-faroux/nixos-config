@@ -31,6 +31,7 @@
       glib
       vscode
       fd
+      networkmanager
   ];
   
   programs.zsh = {

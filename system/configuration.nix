@@ -23,7 +23,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nini"; # Define your hostname.
-  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.networkmanager.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Enable for docker daemon
   virtualisation.docker.enable = true;
@@ -80,6 +80,7 @@
     extraGroups = [
       "wheel" 
       "docker"
+      "networkmanager"
     ];
     initialPassword = "";
   };
