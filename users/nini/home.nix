@@ -25,13 +25,13 @@
       git
       tmux
       ripgrep
-      google-chrome
       docker
       docker-compose
       glib
       vscode
       fd
       networkmanager
+      htop
   ];
   
   programs.zsh = {
@@ -66,6 +66,19 @@
     ];
     localVariables = {
       EDITOR = "vim";
+    };
+  };
+
+  programs.exa = {
+    enable = true;
+    enableAliases = true;
+  };
+
+  programs.bat = {
+    enable = true;
+    config = {
+      theme = "TwoDark";
+      pager = "less - FR";
     };
   };
 
