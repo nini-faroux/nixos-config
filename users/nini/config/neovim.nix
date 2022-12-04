@@ -15,7 +15,12 @@
 
     # Neovim plugins
     plugins = with pkgs.vimPlugins; [
-      nerdtree
+
+      {
+        plugin = nerdtree;
+        config = builtins.readFile(./nerdtree-settings.vim);
+      }
+
       vim-nix
       vim-markdown
     ];
