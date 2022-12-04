@@ -8,10 +8,7 @@
     # Sets alias vim=nvim
     vimAlias = true;
 
-    extraConfig = ''
-      :imap jj <Esc>
-      :set number
-    '';
+    extraConfig = builtins.readFile(./general-vim-settings.vim);
 
     # Neovim plugins
     plugins = with pkgs.vimPlugins; [
@@ -21,6 +18,17 @@
         config = builtins.readFile(./nerdtree-settings.vim);
       }
 
+
+      {
+        plugin = fzf-vim;
+        config = builtins.readFile(./fzf-settings.vim);
+      }
+
+      auto-pairs
+      purescript-vim
+      haskell-vim
+      vim-commentary
+      YouCompleteMe
       vim-nix
       vim-markdown
     ];
