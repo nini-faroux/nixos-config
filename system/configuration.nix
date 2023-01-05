@@ -6,11 +6,16 @@
 
 {
   nix = {
-    extraOptions = "experimental-features = nix-command flakes";
-    package = pkgs.nixFlakes;
-    binaryCaches = [ "https://hydra.iohk.io" "https://iohk.cachix.org" ];
+    extraOptions= "extra-experimental-features = nix-command flakes ca-derivations";
+
+    # package = pkgs.nixFlakes;
+    binaryCaches =
+      [ "https://cache.iog.io" ];
     binaryCachePublicKeys =
-    [ "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ=" "iohk.cachix.org-1:DpRUyj7h7V830dp/i6Nti+NEO2/nhblbov/8MW7Rqoo=" ];
+      [ "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
+        "iohk.cachix.org-1:DpRUyj7h7V830dp/i6Nti+NEO2/nhblbov/8MW7Rqoo="
+        "public-plutonomicon.cachix.org-1:3AKJMhCLn32gri1drGuaZmFrmnue+KkKrhhubQk/CWc="
+      ];
   };
 
   imports =
