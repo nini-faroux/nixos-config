@@ -10,11 +10,12 @@
 
     # package = pkgs.nixFlakes;
     binaryCaches =
-      [ "https://cache.iog.io" ];
+      [ "https://cache.iog.io" "https://mlabs.cachix.org" ];
     binaryCachePublicKeys =
       [ "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
         "iohk.cachix.org-1:DpRUyj7h7V830dp/i6Nti+NEO2/nhblbov/8MW7Rqoo="
         "public-plutonomicon.cachix.org-1:3AKJMhCLn32gri1drGuaZmFrmnue+KkKrhhubQk/CWc="
+        "mlabs.cachix.org-1:gStKdEqNKcrlSQw5iMW6wFCj3+b+1ASpBVY2SYuNV2M="
       ];
   };
 
@@ -29,6 +30,7 @@
 
   networking.hostName = "nini"; # Define your hostname.
   networking.networkmanager.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.firewall.enable = true;
 
   # Enable for docker daemon
   virtualisation.docker.enable = true;
