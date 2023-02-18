@@ -67,6 +67,17 @@
     localVariables = {
       EDITOR = "vim";
     };
+
+    shellAliases = {
+      cb = "cabal build";
+      ct = "cabal test";
+      mrb = "make run-build";
+      mrd = "make run-dev-dashboard";
+      spt = "spago test --main Test.Plutip";
+      spb = "spago build";
+      nd = "nix develop -c zsh";
+    };
+
   };
 
   programs.exa = {
