@@ -2,8 +2,8 @@
   description = "nini system config";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-22.05";
-    home-manager.url = "github:nix-community/home-manager/release-22.05";
+    nixpkgs.url = "nixpkgs/nixos-22.11";
+    home-manager.url = "github:nix-community/home-manager/release-22.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -20,17 +20,21 @@
   in { 
     homeManagerConfigurations = {
       nini = home-manager.lib.homeManagerConfiguration {
-         inherit system pkgs;
-         username = "nini";
-         stateVersion = "21.11";
-         homeDirectory = "/home/nini";
-         configuration = { 
-            imports = [
-               ./users/nini/home.nix
-	             ./users/nini/config/tmux.nix
-	             ./users/nini/config/neovim.nix
-            ];
-         }; 
+
+        pkgs = pkgs;
+
+        modules = [
+          ./users/nini/home.nix
+          ./users/nini/config/tmux.nix
+          ./users/nini/config/neovim.nix
+          {
+            home = {
+              username = "nini";
+              homeDirectory = "/home/nini";
+              stateVersion = "22.11";
+            };
+          }
+        ];
       };
     };
 

@@ -8,7 +8,6 @@
   nix = {
     extraOptions= "extra-experimental-features = nix-command flakes ca-derivations";
 
-    # package = pkgs.nixFlakes;
     binaryCaches =
       [ "https://cache.iog.io" "https://mlabs.cachix.org" ];
     binaryCachePublicKeys =
@@ -68,7 +67,6 @@
   # Enable the Plasma 5 Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
-  
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
@@ -97,7 +95,6 @@
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
-    firefox
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
