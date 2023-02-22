@@ -69,13 +69,21 @@
     };
 
     shellAliases = {
+      # cabal
       cb = "cabal build";
       ct = "cabal test";
+      # spago
+      sb = "spago build";
+      st = "spago test";
+      stp = "spago test --main Test.Plutip";
+      # make
       mrb = "make run-build";
       mrd = "make run-dev-dashboard";
-      spt = "spago test --main Test.Plutip";
-      spb = "spago build";
+      mf = "make format";
+      # nix
       nd = "nix develop -c zsh";
+      # nvim
+      nv = "nvim";
     };
 
   };
