@@ -9,7 +9,10 @@
     extraOptions= "extra-experimental-features = nix-command flakes ca-derivations";
 
     binaryCaches =
-      [ "https://cache.iog.io" "https://mlabs.cachix.org" ];
+      [ "https://cache.iog.io"
+        "https://mlabs.cachix.org"
+        "https://public-plutonomicon.cachix.org"
+      ];
     binaryCachePublicKeys =
       [ "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
         "iohk.cachix.org-1:DpRUyj7h7V830dp/i6Nti+NEO2/nhblbov/8MW7Rqoo="

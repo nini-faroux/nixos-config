@@ -84,6 +84,9 @@
       nd = "nix develop -c zsh";
       # nvim
       nv = "nvim";
+      # git
+      gs = "git status";
+      ga = "git add";
     };
 
   };
