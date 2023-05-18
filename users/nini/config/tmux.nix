@@ -51,6 +51,9 @@
       set-option -g focus-events on
       set -g default-terminal "screen-256color"
       set-option -sa terminal-overrides ',screen-256color:RGB'
+
+      # Increase the scrollback buffer size
+      set-option history-limit 20000
       
       # log the session 
       run-shell /opt/tmux-logging/logging.tmux
