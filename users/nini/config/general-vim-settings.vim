@@ -1,3 +1,6 @@
+" Use pathogen for plugins
+execute pathogen#infect()
+
 " set syntax highlighting
 syntax enable
 

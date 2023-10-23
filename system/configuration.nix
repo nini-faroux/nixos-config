@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, ... }:
 
 {
@@ -11,12 +7,10 @@
     binaryCaches =
       [ "https://cache.iog.io"
         "https://mlabs.cachix.org"
-        "https://public-plutonomicon.cachix.org"
       ];
     binaryCachePublicKeys =
       [ "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
         "iohk.cachix.org-1:DpRUyj7h7V830dp/i6Nti+NEO2/nhblbov/8MW7Rqoo="
-        "public-plutonomicon.cachix.org-1:3AKJMhCLn32gri1drGuaZmFrmnue+KkKrhhubQk/CWc="
         "mlabs.cachix.org-1:gStKdEqNKcrlSQw5iMW6wFCj3+b+1ASpBVY2SYuNV2M="
       ];
   };
@@ -66,10 +60,12 @@
     xkbOptions = "ctrl:swapcaps, eurosign:e";
   };
 
-
   # Enable the Plasma 5 Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
+
+  # Optimise storage
+  nix.settings.auto-optimise-store = true;
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
@@ -80,6 +76,9 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
+
+  # Need to enable here as well as Home manager since upgrading, otherwise get error
+  programs.zsh.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.nini = {

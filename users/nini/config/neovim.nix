@@ -18,7 +18,6 @@
         config = builtins.readFile(./nerdtree-settings.vim);
       }
 
-
       {
         plugin = fzf-vim;
         config = builtins.readFile(./fzf-settings.vim);

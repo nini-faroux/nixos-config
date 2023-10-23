@@ -14,15 +14,13 @@
   # You can update Home Manager without changing this value. See
   # the Home Manager release notes for a list of state version
   # changes in each release.
-  home.stateVersion = "22.11";
+  home.stateVersion = "23.05";
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
   home.packages = with pkgs; [
       google-chrome
-      zsh
-      oh-my-zsh
       git
       tmux
       ripgrep
@@ -32,8 +30,24 @@
       fd
       networkmanager
       htop
+      nodejs
+      gcc
+      gnumake
+      python3
+      direnv
+      ngrok
+      inetutils
+      postgresql
+      rustup
+      llvmPackages.libclang
+      protobuf
+      cabal-install
+      stack
+      yarn
+      docker
+      haskell.compiler.ghc942
   ];
-  
+
   programs.zsh = {
     enable = true;
     oh-my-zsh = {
@@ -76,6 +90,10 @@
       sb = "spago build";
       st = "spago test";
       stp = "spago test --main Test.Plutip";
+      # rust
+      crb = "cargo build";
+      crt = "cargo test";
+      crn = "cargo new";
       # make
       mrb = "make run-build";
       mrd = "make run-dev-dashboard";
