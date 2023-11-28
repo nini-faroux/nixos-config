@@ -45,7 +45,15 @@
       stack
       yarn
       docker
-      haskell.compiler.ghc942
+      haskell.compiler.ghc8107
+      haskellPackages.fourmolu
+      haskellPackages.hlint
+      mdbook
+      gscreenshot
+      simplescreenrecorder
+      vlc
+      pamixer
+      pipewire
   ];
 
   programs.zsh = {
