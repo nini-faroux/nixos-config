@@ -5,9 +5,11 @@
     nixpkgs.url = "nixpkgs/nixos-23.05";
     home-manager.url = "github:nix-community/home-manager/release-23.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    aiken.url = "github:aiken-lang/aiken";
   };
 
-  outputs = { nixpkgs, home-manager, ... }:
+  outputs = { nixpkgs, home-manager, aiken, ... }:
   let 
     pkgs = import nixpkgs {
        inherit system;
@@ -18,15 +20,21 @@
     lib = nixpkgs.lib;
 
   in { 
+
     homeManagerConfigurations = {
       nini = home-manager.lib.homeManagerConfiguration {
 
         pkgs = pkgs;
 
+        extraSpecialArgs = {
+          inherit aiken;
+          inherit system;
+        };
+
         modules = [
           ./users/nini/home.nix
-          ./users/nini/config/tmux.nix
-          ./users/nini/config/neovim.nix
+          ./users/nini/config/tmux/tmux.nix
+          ./users/nini/config/nvim/nix/nvim.nix
           {
             home = {
               username = "nini";
@@ -47,5 +55,7 @@
         ];
       };
     };
+
   };
+
 }

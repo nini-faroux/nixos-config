@@ -8,19 +8,19 @@
     # Sets alias vim=nvim
     vimAlias = true;
 
-    extraConfig = builtins.readFile(./general-vim-settings.vim);
+    extraConfig = builtins.readFile(../vim/general-vim-settings.vim);
 
     # Neovim plugins
     plugins = with pkgs.vimPlugins; [
 
       {
         plugin = nerdtree;
-        config = builtins.readFile(./nerdtree-settings.vim);
+        config = builtins.readFile(../vim/nerdtree-settings.vim);
       }
 
       {
         plugin = fzf-vim;
-        config = builtins.readFile(./fzf-settings.vim);
+        config = builtins.readFile(../vim/fzf-settings.vim);
       }
 
       auto-pairs
@@ -30,6 +30,7 @@
       YouCompleteMe
       vim-nix
       vim-markdown
+      nvim-lspconfig
     ];
   };
 }

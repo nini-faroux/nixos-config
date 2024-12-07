@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, aiken, system, ... }:
 
 {
   # Home Manager needs a bit of information about you and the
@@ -19,7 +19,8 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  home.packages = with pkgs; [
+  home.packages = with pkgs; ([
+      cachix
       google-chrome
       git
       tmux
@@ -48,13 +49,25 @@
       haskell.compiler.ghc8107
       haskellPackages.fourmolu
       haskellPackages.hlint
+      haskellPackages.haskell-language-server
+      haskellPackages.implicit-hie
+      haskellPackages.hie-bios
       mdbook
       gscreenshot
       simplescreenrecorder
       vlc
       pamixer
       pipewire
-  ];
+      nix-prefetch-git
+      okular
+      nodePackages.purescript-language-server
+      litemdview
+      pciutils
+      zip
+      unzip
+    ] ++
+    [ nil
+    ]);
 
   programs.zsh = {
     enable = true;
@@ -117,9 +130,8 @@
 
   };
 
-  programs.exa = {
+  programs.eza = {
     enable = true;
-    enableAliases = true;
   };
 
   programs.bat = {
@@ -131,7 +143,7 @@
   };
 
   imports = [
-      ./config/tmux.nix
-      ./config/neovim.nix
+      ./config/tmux/tmux.nix
+      ./config/nvim/nix/nvim.nix
   ];
 }
