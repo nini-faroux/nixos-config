@@ -61,6 +61,7 @@
       nix-prefetch-git
       okular
       nodePackages.purescript-language-server
+      purescriptls
       litemdview
       pciutils
       zip
@@ -144,6 +145,5 @@
 
   imports = [
       ./config/tmux/tmux.nix
-      ./config/nvim/nix/nvim.nix
   ];
 }
