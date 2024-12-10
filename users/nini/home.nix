@@ -61,7 +61,6 @@
       nix-prefetch-git
       okular
       nodePackages.purescript-language-server
-      purescriptls
       litemdview
       pciutils
       zip
@@ -127,12 +126,18 @@
       # git
       gs = "git status";
       ga = "git add";
+      # ls
+      ls = "ls -l";
     };
 
   };
 
-  programs.eza = {
+  programs.neovim = {
     enable = true;
+    
+    viAlias = true;
+    vimAlias = true;
+    vimdiffAlias = true;
   };
 
   programs.bat = {

@@ -34,7 +34,6 @@
         modules = [
           ./users/nini/home.nix
           ./users/nini/config/tmux/tmux.nix
-          ./users/nini/config/nvim/nix/nvim.nix
           {
             home = {
               username = "nini";
