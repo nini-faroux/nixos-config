@@ -1,0 +1,1 @@
+-- require('purescript-contrib/purescript-vim').setup({})

@@ -1,22 +1,11 @@
-{ config, pkgs, aiken, system, ... }:
+{ config, pkgs, aiken, nvim-tree, system, ... }:
 
 {
-  # Home Manager needs a bit of information about you and the
-  # paths it should manage.
   home.username = "nini";
   home.homeDirectory = "/home/nini";
 
-  # This value determines the Home Manager release that your
-  # configuration is compatible with. This helps avoid breakage
-  # when a new Home Manager release introduces backwards
-  # incompatible changes.
-  #
-  # You can update Home Manager without changing this value. See
-  # the Home Manager release notes for a list of state version
-  # changes in each release.
   home.stateVersion = "23.05";
 
-  # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
   home.packages = with pkgs; ([
@@ -65,6 +54,7 @@
       pciutils
       zip
       unzip
+	  vscode
     ] ++
     [ nil
     ]);
@@ -132,13 +122,61 @@
 
   };
 
-  programs.neovim = {
-    enable = true;
-    
-    viAlias = true;
-    vimAlias = true;
-    vimdiffAlias = true;
-  };
+  programs.neovim =
+    let
+       toLua = str: "lua << EOF\n${str}\nEOF\n";
+       toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
+    in 
+    {
+      enable = true;
+      
+      viAlias = true;
+      vimAlias = true;
+      vimdiffAlias = true;
+
+      extraLuaConfig = ''
+        ${builtins.readFile ./config/nvim/lua/options.lua}
+      '';
+
+      extraPackages = with pkgs; [
+		luajitPackages.lua-lsp
+	    lua-language-server
+		nodePackages.purescript-language-server
+		rnix-lsp
+		nvim-tree
+	  ];
+
+      plugins = with pkgs.vimPlugins; [
+	    {
+	      plugin = nvim-lspconfig;
+	      config = toLuaFile ./config/nvim/lua/plugin/lsp.lua;
+	    }
+
+	    cmp_luasnip
+	    luasnip
+
+        cmp-nvim-lsp
+        neodev-nvim
+
+        nvim-cmp 
+        {
+          plugin = nvim-cmp;
+          config = toLuaFile ./config/nvim/lua/plugin/cmp.lua;
+        }
+
+	    {
+	      plugin = telescope-nvim;
+	      config = toLuaFile ./config/nvim/lua/plugin/telescope.lua;
+	    }
+
+        # nvim-tree
+		# {
+		#   plugin = nvim-tree;
+		#   config = toLuaFile ./config/nvim/lua/plugin/nvim-tree.lua;
+		# }
+
+     ];
+    };
 
   programs.bat = {
     enable = true;

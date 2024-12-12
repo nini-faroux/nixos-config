@@ -106,11 +106,63 @@
         "type": "indirect"
       }
     },
+    "nixpkgs_4": {
+      "locked": {
+        "lastModified": 1675431879,
+        "narHash": "sha256-kF/24JC5syftRJE64GMK14/vdLRbuEzZjV1cqxBfCeU=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "959190ecf6e5b8c7c30721f3235de84d568359ee",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nvim-tree": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1733619933,
+        "narHash": "sha256-3ZIxXhrCQM3rZA7QwqTo8VV5yxyvd3WhQjiAVOgK/l8=",
+        "owner": "nvim-tree",
+        "repo": "nvim-tree.lua",
+        "rev": "db8d7ac1f524fc6f808764b29fa695c51e014aa6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-tree",
+        "repo": "nvim-tree.lua",
+        "type": "github"
+      }
+    },
+    "purescript-vim": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_4"
+      },
+      "locked": {
+        "lastModified": 1675674661,
+        "narHash": "sha256-IrPiiDghh5qdeaTM6M4oRzay+LvqL3sdoiM2m89O4pA=",
+        "owner": "purescript-contrib",
+        "repo": "purescript-vim",
+        "rev": "82348352e6568fcc0385bd7c99a8ead3a479feea",
+        "type": "github"
+      },
+      "original": {
+        "owner": "purescript-contrib",
+        "repo": "purescript-vim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "aiken": "aiken",
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_3",
+        "nvim-tree": "nvim-tree",
+        "purescript-vim": "purescript-vim"
       }
     },
     "rust-overlay": {
