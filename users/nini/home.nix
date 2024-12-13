@@ -1,4 +1,4 @@
-{ config, pkgs, aiken, nvim-tree, system, ... }:
+{ config, pkgs, system, oil, ... }:
 
 {
   home.username = "nini";
@@ -7,6 +7,19 @@
   home.stateVersion = "23.05";
 
   programs.home-manager.enable = true;
+
+  nixpkgs = {
+     overlays = [
+       (final: prev: {
+         vimPlugins = prev.vimPlugins // {
+           own-oil = prev.vimUtils.buildVimPlugin {
+             name = "nvimtree";
+             src = oil;
+           };
+         };
+       })
+     ];
+  };
 
   home.packages = with pkgs; ([
       cachix
@@ -143,7 +156,6 @@
 	    lua-language-server
 		nodePackages.purescript-language-server
 		rnix-lsp
-		nvim-tree
 	  ];
 
       plugins = with pkgs.vimPlugins; [
@@ -169,11 +181,10 @@
 	      config = toLuaFile ./config/nvim/lua/plugin/telescope.lua;
 	    }
 
-        # nvim-tree
-		# {
-		#   plugin = nvim-tree;
-		#   config = toLuaFile ./config/nvim/lua/plugin/nvim-tree.lua;
-		# }
+		{
+		  plugin = pkgs.vimPlugins.own-oil;
+		  config = toLuaFile ./config/nvim/lua/plugin/oil.lua;
+		}
 
      ];
     };

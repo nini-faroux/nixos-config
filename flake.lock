@@ -7,11 +7,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1733642998,
-        "narHash": "sha256-E/KGmgteVk/ZhHJMn8ne9arILByocPGTA4ZqpMqX/0g=",
+        "lastModified": 1734074559,
+        "narHash": "sha256-rQZ2WANSP9Sg6PRbsUPkNW+lbKvPxilbHmmuykGfRM0=",
         "owner": "aiken-lang",
         "repo": "aiken",
-        "rev": "ebc7d89d5d7f6b569edb7adeb6ba0c6f2ed3a9db",
+        "rev": "27dab4a5e58940c6dec0861aee17ec009d8c70a0",
         "type": "github"
       },
       "original": {
@@ -122,19 +122,19 @@
         "type": "github"
       }
     },
-    "nvim-tree": {
+    "oil": {
       "flake": false,
       "locked": {
-        "lastModified": 1733619933,
-        "narHash": "sha256-3ZIxXhrCQM3rZA7QwqTo8VV5yxyvd3WhQjiAVOgK/l8=",
-        "owner": "nvim-tree",
-        "repo": "nvim-tree.lua",
-        "rev": "db8d7ac1f524fc6f808764b29fa695c51e014aa6",
+        "lastModified": 1733872944,
+        "narHash": "sha256-LM/RWrh3zSVuiO3uI9lcZRjx1T1kw0L2fB1fQCBnHX4=",
+        "owner": "stevearc",
+        "repo": "oil.nvim",
+        "rev": "dba037598843973b8c54bc5ce0318db4a0da439d",
         "type": "github"
       },
       "original": {
-        "owner": "nvim-tree",
-        "repo": "nvim-tree.lua",
+        "owner": "stevearc",
+        "repo": "oil.nvim",
         "type": "github"
       }
     },
@@ -161,7 +161,7 @@
         "aiken": "aiken",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_3",
-        "nvim-tree": "nvim-tree",
+        "oil": "oil",
         "purescript-vim": "purescript-vim"
       }
     },

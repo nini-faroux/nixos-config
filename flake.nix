@@ -9,13 +9,13 @@
 	# Packages not available in home-manager
     aiken.url = "github:aiken-lang/aiken";
     purescript-vim.url = "github:purescript-contrib/purescript-vim";
-    nvim-tree = {
-      url = "github:nvim-tree/nvim-tree.lua";
+    oil = {
+      url = "github:stevearc/oil.nvim";
       flake = false;
     };
   };
 
-  outputs = { nixpkgs, home-manager, aiken, nvim-tree, ... }:
+  outputs = { nixpkgs, home-manager, oil, ... }:
   let 
     pkgs = import nixpkgs {
        inherit system;
@@ -33,8 +33,7 @@
         pkgs = pkgs;
 
         extraSpecialArgs = {
-          inherit aiken;
-		  inherit nvim-tree;
+		  inherit oil;
           inherit system;
         };
 
