@@ -1,4 +1,4 @@
-{ config, pkgs, system, oil, ... }:
+{ config, pkgs, system, oil, purescript-vim, ... }:
 
 {
   home.username = "nini";
@@ -16,6 +16,10 @@
              name = "nvimtree";
              src = oil;
            };
+		   own-purescript-vim = prev.vimUtils.buildVimPlugin {
+		     name = "purescriptvim";
+			 src = purescript-vim;
+		   };
          };
        })
      ];
@@ -185,6 +189,8 @@
 		  plugin = pkgs.vimPlugins.own-oil;
 		  config = toLuaFile ./config/nvim/lua/plugin/oil.lua;
 		}
+
+		own-purescript-vim
 
      ];
     };

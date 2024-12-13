@@ -15,7 +15,7 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, oil, ... }:
+  outputs = { nixpkgs, home-manager, oil, purescript-vim, ... }:
   let 
     pkgs = import nixpkgs {
        inherit system;
@@ -34,6 +34,7 @@
 
         extraSpecialArgs = {
 		  inherit oil;
+		  inherit purescript-vim;
           inherit system;
         };
 
