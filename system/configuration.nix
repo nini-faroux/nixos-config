@@ -47,18 +47,18 @@
 
   # Enable the X11 windowing system.
   # Use capslock for ctrl
-  services.xserver = {
-    enable = true;
-    layout = "gb";
-    xkbOptions = "ctrl:swapcaps, eurosign:e";
-  };
+  # services.xserver = {
+  #   enable = true;
+  #   layout = "gb";
+  #   xkbOptions = "ctrl:swapcaps, eurosign:e";
+  # };
 
   # Enable the Plasma 5 Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  # services.xserver.displayManager.sddm.enable = true;
+  # services.xserver.desktopManager.plasma5.enable = true;
 
-  # Optimise storage
-  nix.settings.auto-optimise-store = true;
+  # Enable touchpad support
+  services.xserver.libinput.enable = true;
 
   # Enable sound, use pipewire
   security.rtkit.enable = true;
@@ -69,8 +69,12 @@
     pulse.enable = true;
   };
 
-  # Enable touchpad support
-  services.xserver.libinput.enable = true;
+  # Wayland stuff
+  security.polkit.enable = true;
+  hardware.opengl.enable = true;
+
+  # Optimise storage
+  nix.settings.auto-optimise-store = true;
 
   # Need to enable here as well as Home manager since upgrading, otherwise get error
   programs.zsh.enable = true;

@@ -137,6 +137,18 @@
     };
   };
 
+  wayland.windowManager.sway = {
+    enable = true;
+	config = rec {
+	  modifier = "Mod4";
+	  output = {
+	    "Virtual-1" = {
+		  mode = "1920x1080@60Hz";
+		};
+	  };
+	};
+  };
+
   programs.neovim =
     let
        toLua = str: "lua << EOF\n${str}\nEOF\n";
@@ -146,10 +158,7 @@
       enable = true;
    
       viAlias = true;
-      vimAlias = true;
-      vimdiffAlias = true;
-
-      extraLuaConfig = ''
+      vimAlias = true; vimdiffAlias = true; extraLuaConfig = ''
         ${builtins.readFile ./config/nvim/lua/options.lua}
       '';
 
