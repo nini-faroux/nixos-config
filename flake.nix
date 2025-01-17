@@ -6,8 +6,12 @@
     home-manager.url = "github:nix-community/home-manager/release-23.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+	neovim-release = {
+	  url = "github:neovim/neovim?rev=8b98642002d0506d20628683958cb5c97a0dad80";
+	  flake = false;
+	};
+
 	# Packages not available in home-manager
-    aiken.url = "github:aiken-lang/aiken";
     purescript-vim.url = "github:purescript-contrib/purescript-vim";
     oil = {
       url = "github:stevearc/oil.nvim";
@@ -15,7 +19,7 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, oil, purescript-vim, ... }:
+  outputs = { nixpkgs, home-manager, oil, purescript-vim, neovim-release, ... }:
   let 
     pkgs = import nixpkgs {
        inherit system;
@@ -35,6 +39,7 @@
         extraSpecialArgs = {
 		  inherit oil;
 		  inherit purescript-vim;
+		  inherit neovim-release;
           inherit system;
         };
 

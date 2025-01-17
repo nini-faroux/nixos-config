@@ -1,4 +1,4 @@
-{ config, pkgs, system, oil, purescript-vim, ... }:
+{ config, pkgs, system, oil, purescript-vim, neovim-release, ... }:
 
 {
   home.username = "nini";
@@ -66,7 +66,6 @@
       pipewire
       nix-prefetch-git
       okular
-      nodePackages.purescript-language-server
       litemdview
       pciutils
       zip
@@ -136,7 +135,6 @@
       # ls
       ls = "ls -l";
     };
-
   };
 
   programs.neovim =
@@ -146,7 +144,7 @@
     in 
     {
       enable = true;
-      
+   
       viAlias = true;
       vimAlias = true;
       vimdiffAlias = true;
@@ -191,7 +189,6 @@
 		}
 
 		own-purescript-vim
-
      ];
     };
 
