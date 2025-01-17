@@ -30,7 +30,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nini"; # Define your hostname.
+  networking.hostName = "nini";
   networking.networkmanager.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.firewall.enable = true;
 
@@ -57,15 +57,6 @@
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
 
-  services.xserver.windowManager =  {
-    xmonad.enable = true;
-    xmonad.enableContribAndExtras = true;
-    xmonad.extraPackages = hpkgs: [
-    hpkgs.xmonad
-    hpkgs.xmonad-extras
-    hpkgs.xmonad-contrib]; 
-  };
-
   # Optimise storage
   nix.settings.auto-optimise-store = true;
 
@@ -84,7 +75,7 @@
   # Need to enable here as well as Home manager since upgrading, otherwise get error
   programs.zsh.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Define a user account
   users.users.nini = {
     isNormalUser = true;
     shell = pkgs.zsh;
