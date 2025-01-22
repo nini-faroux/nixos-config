@@ -147,6 +147,12 @@
 		};
 	  };
 	};
+	extraConfig = ''
+	  input "type:keyboard" {
+		xkb_layout gb
+	    xkb_options "ctrl:nocaps"
+	  }
+	'';
   };
 
   programs.neovim =

@@ -45,21 +45,6 @@
   networking.interfaces.enp4s0.useDHCP = true;
   networking.interfaces.wlp0s20f3.useDHCP = true;
 
-  # Enable the X11 windowing system.
-  # Use capslock for ctrl
-  # services.xserver = {
-  #   enable = true;
-  #   layout = "gb";
-  #   xkbOptions = "ctrl:swapcaps, eurosign:e";
-  # };
-
-  # Enable the Plasma 5 Desktop Environment.
-  # services.xserver.displayManager.sddm.enable = true;
-  # services.xserver.desktopManager.plasma5.enable = true;
-
-  # Enable touchpad support
-  services.xserver.libinput.enable = true;
-
   # Enable sound, use pipewire
   security.rtkit.enable = true;
   services.pipewire = {
