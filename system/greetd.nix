@@ -8,13 +8,10 @@
     settings = {
      default_session.command = ''
       ${pkgs.greetd.tuigreet}/bin/tuigreet \
+		--time \
         --user-menu \
         --cmd sway
     '';
     };
   };
-
-  environment.etc."greetd/environments".text = ''
-    sway
-  '';
 }
