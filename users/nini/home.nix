@@ -70,7 +70,9 @@
       pciutils
       zip
       unzip
-	  vscode
+	  pulseaudio
+	  alacritty
+	  (nerdfonts.override {fonts = ["JetBrainsMono"];})
     ] ++
     [ nil
     ]);
@@ -137,17 +139,72 @@
     };
   };
 
+  fonts.fontconfig.enable = true;
+
+  programs.alacritty = {
+    enable = true;
+    settings = {
+      env.TERM = "alacritty";
+      window = {
+        decorations = "full";
+        title = "Alacritty";
+        dynamic_title = true;
+        class = {
+          instance = "Alacritty";
+          general = "Alacritty";
+        };
+      };
+      font = {
+        normal = {
+          family = "JetBrains Mono Nerd Font";
+          style = "Regular";
+        };
+        bold = {
+          family = "JetBrains Mono Nerd Font";
+          style = "Bold";
+        };
+        italic = {
+          family = "JetBrains Mono Nerd Font";
+          style = "Italic";
+        };
+        bold_italic = {
+          family = "JetBrains Mono Nerd Font";
+          style = "regular";
+        };
+        size = 14.00;
+      };
+      colors = {
+        primary = {
+          background = "#1d1f21";
+          foreground = "#c5c8c6";
+        };
+      };
+    };
+  };
+
   wayland.windowManager.sway = {
     enable = true;
+	wrapperFeatures.gtk = true;
 	config = rec {
 	  modifier = "Mod4";
+	  terminal = "alacritty";
 	  output = {
-	    "Virtual-1" = {
-		  mode = "1920x1080@60Hz";
-		};
+        eDP-1 = {
+          # Set HIDP scale (pixel integer scaling)
+          scale = "1";
+	    };
 	  };
 	};
 	extraConfig = ''
+	  # Brightness
+      bindsym XF86MonBrightnessDown exec light -U 10
+      bindsym XF86MonBrightnessUp exec light -A 10
+
+      # Volume
+	  bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+      bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+      bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+
 	  input "type:keyboard" {
 		xkb_layout gb
 	    xkb_options "ctrl:nocaps"

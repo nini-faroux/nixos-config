@@ -55,9 +55,12 @@
     pulse.enable = true;
   };
 
-  # Wayland stuff
+  # wayland stuff
   security.polkit.enable = true;
   hardware.opengl.enable = true;
+
+  # enable brightness
+  programs.light.enable = true;
 
   # Optimise storage
   nix.settings.auto-optimise-store = true;
@@ -74,6 +77,7 @@
       "docker"
       "networkmanager"
       "audio"
+	  "video"
     ];
     initialPassword = "";
   };
