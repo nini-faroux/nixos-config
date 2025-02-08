@@ -45,6 +45,7 @@
       ngrok
       inetutils
       postgresql
+	  postman
       rustup
       llvmPackages.libclang
       protobuf
@@ -229,6 +230,8 @@
 		luajitPackages.lua-lsp
 	    lua-language-server
 		nodePackages.purescript-language-server
+		nodePackages.typescript
+		nodePackages.typescript-language-server
 		rnix-lsp
 	  ];
 
