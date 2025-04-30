@@ -20,53 +20,49 @@
   };
 
   outputs = { nixpkgs, home-manager, oil, purescript-vim, neovim-release, ... }:
-  let 
-    pkgs = import nixpkgs {
-       inherit system;
-       config = { allowUnfree = true; };
-    };
 
-    system = "x86_64-linux";
-    lib = nixpkgs.lib;
+    let
+      pkgs = import nixpkgs {
+         inherit system;
+         config = { allowUnfree = true; };
+      };
 
-  in { 
+      system = "x86_64-linux";
+      lib = nixpkgs.lib;
 
-    homeManagerConfigurations = {
-      nini = home-manager.lib.homeManagerConfiguration {
+    in {
 
-        pkgs = pkgs;
+      homeManagerConfigurations = {
+        nini = home-manager.lib.homeManagerConfiguration {
 
-        extraSpecialArgs = {
-		  inherit oil;
-		  inherit purescript-vim;
-		  inherit neovim-release;
-          inherit system;
+          pkgs = pkgs;
+
+          extraSpecialArgs = {
+            inherit system oil purescript-vim neovim-release;
+          };
+
+          modules = [
+            ./users/nini/home.nix
+            ./users/nini/config/tmux/tmux.nix
+            {
+              home = {
+                username = "nini";
+                homeDirectory = "/home/nini";
+                stateVersion = "23.05";
+              };
+            }
+          ];
         };
-
-        modules = [
-          ./users/nini/home.nix
-          ./users/nini/config/tmux/tmux.nix
-          {
-            home = {
-              username = "nini";
-              homeDirectory = "/home/nini";
-              stateVersion = "23.05";
-            };
-          }
-        ];
       };
-    };
 
-    nixosConfigurations = { 
-      nini = lib.nixosSystem { 
-        inherit system;
+      nixosConfigurations.nini = lib.nixosSystem {
+          inherit system;
 
-        modules = [
-          ./system/configuration.nix
-        ];
+          modules = [
+            ./system/configuration.nix
+          ];
       };
-    };
 
-  };
+    };
 
 }

@@ -73,6 +73,7 @@
       unzip
 	  pulseaudio
 	  alacritty
+	  exa
 	  (nerdfonts.override {fonts = ["JetBrainsMono"];})
     ] ++
     [ nil
@@ -129,6 +130,7 @@
       mrd = "make run-dev-dashboard";
       mf = "make format";
       # nix
+	  # Load the zsh shell with flakes
       nd = "nix develop -c zsh";
       # nvim
       nv = "nvim";
@@ -136,7 +138,7 @@
       gs = "git status";
       ga = "git add";
       # ls
-      ls = "ls -l";
+      ls = "exa";
     };
   };
 
@@ -186,7 +188,8 @@
   wayland.windowManager.sway = {
     enable = true;
 	wrapperFeatures.gtk = true;
-	config = rec {
+
+	config = {
 	  modifier = "Mod4";
 	  terminal = "alacritty";
 	  output = {
@@ -196,6 +199,7 @@
 	    };
 	  };
 	};
+
 	extraConfig = ''
 	  # Brightness
       bindsym XF86MonBrightnessDown exec light -U 10
@@ -211,6 +215,13 @@
 	    xkb_options "ctrl:nocaps"
 	  }
 	'';
+  };
+
+  home.pointerCursor = {
+    gtk.enable = true;
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Ice";
+    size = 20;
   };
 
   programs.neovim =
@@ -273,6 +284,15 @@
       theme = "TwoDark";
       pager = "less - FR";
     };
+  };
+
+  programs.obs-studio = {
+    enable = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      wlrobs
+      obs-backgroundremoval
+      obs-pipewire-audio-capture
+    ];
   };
 
   imports = [
