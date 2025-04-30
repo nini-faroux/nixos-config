@@ -214,6 +214,10 @@
 		xkb_layout gb
 	    xkb_options "ctrl:nocaps"
 	  }
+
+	  input "type:touchpad" {
+	    tap enabled
+	  }
 	'';
   };
 
