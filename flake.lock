@@ -7,49 +7,31 @@
         ]
       },
       "locked": {
-        "lastModified": 1716729631,
-        "narHash": "sha256-IerjU5GUeKc0eW9FPOdlPveSGJ2ZrO+lIfuHPUmUF2I=",
+        "lastModified": 1749062139,
+        "narHash": "sha256-gGGLujmeWU+ZjFzfMvFMI0hp9xONsSbm88187wJr82Q=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "fc4492181833eaaa7a26a8081c0615d95792d825",
+        "rev": "86b95fc1ed2b9b04a451a08ccf13d78fb421859c",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
-        "ref": "release-23.05",
         "repo": "home-manager",
-        "type": "github"
-      }
-    },
-    "neovim-release": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1727945314,
-        "narHash": "sha256-+qjjelYMB3MyjaESfCaGoeBURUzSVh/50uxUqStxIfY=",
-        "owner": "neovim",
-        "repo": "neovim",
-        "rev": "8b98642002d0506d20628683958cb5c97a0dad80",
-        "type": "github"
-      },
-      "original": {
-        "owner": "neovim",
-        "repo": "neovim",
-        "rev": "8b98642002d0506d20628683958cb5c97a0dad80",
         "type": "github"
       }
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1704290814,
-        "narHash": "sha256-LWvKHp7kGxk/GEtlrGYV68qIvPHkU9iToomNFGagixU=",
+        "lastModified": 1748929857,
+        "narHash": "sha256-lcZQ8RhsmhsK8u7LIFsJhsLh/pzR9yZ8yqpTzyGdj+Q=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "70bdadeb94ffc8806c0570eb5c2695ad29f0e421",
+        "rev": "c2a03962b8e24e669fb37b7df10e7c79531ff1a4",
         "type": "github"
       },
       "original": {
         "id": "nixpkgs",
-        "ref": "nixos-23.05",
+        "ref": "nixos-unstable",
         "type": "indirect"
       }
     },
@@ -72,11 +54,11 @@
     "oil": {
       "flake": false,
       "locked": {
-        "lastModified": 1733872944,
-        "narHash": "sha256-LM/RWrh3zSVuiO3uI9lcZRjx1T1kw0L2fB1fQCBnHX4=",
+        "lastModified": 1749076816,
+        "narHash": "sha256-fbRbRT9VJdppOs4hML1J113qLHdj7YRuSDQgZkt34cM=",
         "owner": "stevearc",
         "repo": "oil.nvim",
-        "rev": "dba037598843973b8c54bc5ce0318db4a0da439d",
+        "rev": "08c2bce8b00fd780fb7999dbffdf7cd174e896fb",
         "type": "github"
       },
       "original": {
@@ -106,7 +88,6 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
-        "neovim-release": "neovim-release",
         "nixpkgs": "nixpkgs",
         "oil": "oil",
         "purescript-vim": "purescript-vim"

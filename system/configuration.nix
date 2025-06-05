@@ -57,7 +57,7 @@
 
   # wayland stuff
   security.polkit.enable = true;
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
 
   # enable brightness
   programs.light.enable = true;

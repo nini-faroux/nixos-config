@@ -1,10 +1,10 @@
-{ config, pkgs, system, oil, purescript-vim, neovim-release, ... }:
+{ pkgs, oil, purescript-vim, ... }:
 
 {
   home.username = "nini";
   home.homeDirectory = "/home/nini";
 
-  home.stateVersion = "23.05";
+  home.stateVersion = "25.11";
 
   programs.home-manager.enable = true;
 
@@ -12,20 +12,24 @@
      overlays = [
        (final: prev: {
          vimPlugins = prev.vimPlugins // {
+
            own-oil = prev.vimUtils.buildVimPlugin {
              name = "nvimtree";
              src = oil;
            };
+
 		   own-purescript-vim = prev.vimUtils.buildVimPlugin {
 		     name = "purescriptvim";
 			 src = purescript-vim;
 		   };
+
          };
        })
      ];
   };
 
   home.packages = with pkgs; ([
+	  brave
       cachix
       google-chrome
       git
@@ -53,12 +57,7 @@
       stack
       yarn
       docker
-      haskell.compiler.ghc8107
-      haskellPackages.fourmolu
-      haskellPackages.hlint
-      haskellPackages.haskell-language-server
-      haskellPackages.implicit-hie
-      haskellPackages.hie-bios
+      haskell.compiler.ghc9101
       mdbook
       gscreenshot
       simplescreenrecorder
@@ -66,15 +65,15 @@
       pamixer
       pipewire
       nix-prefetch-git
-      okular
+      kdePackages.okular
       litemdview
       pciutils
       zip
       unzip
 	  pulseaudio
 	  alacritty
-	  exa
-	  (nerdfonts.override {fonts = ["JetBrainsMono"];})
+	  eza
+      nerd-fonts.jetbrains-mono
     ] ++
     [ nil
     ]);
@@ -138,7 +137,7 @@
       gs = "git status";
       ga = "git add";
       # ls
-      ls = "exa";
+      ls = "eza";
     };
   };
 
@@ -230,12 +229,11 @@
 
   programs.neovim =
     let
-       toLua = str: "lua << EOF\n${str}\nEOF\n";
        toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
     in 
     {
       enable = true;
-   
+
       viAlias = true;
       vimAlias = true; vimdiffAlias = true; extraLuaConfig = ''
         ${builtins.readFile ./config/nvim/lua/options.lua}
@@ -244,10 +242,8 @@
       extraPackages = with pkgs; [
 		luajitPackages.lua-lsp
 	    lua-language-server
-		nodePackages.purescript-language-server
 		nodePackages.typescript
 		nodePackages.typescript-language-server
-		rnix-lsp
 	  ];
 
       plugins = with pkgs.vimPlugins; [
@@ -255,6 +251,13 @@
 	      plugin = nvim-lspconfig;
 	      config = toLuaFile ./config/nvim/lua/plugin/lsp.lua;
 	    }
+
+		tokyonight-nvim
+
+		{
+		  plugin = nvim-treesitter;
+		  config = toLuaFile ./config/nvim/lua/plugin/treesitter.lua;
+		}
 
 	    cmp_luasnip
 	    luasnip
@@ -280,6 +283,7 @@
 
 		own-purescript-vim
      ];
+
     };
 
   programs.bat = {

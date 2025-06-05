@@ -2,14 +2,9 @@
   description = "nini system config";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-23.05";
-    home-manager.url = "github:nix-community/home-manager/release-23.05";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
+    home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
-	neovim-release = {
-	  url = "github:neovim/neovim?rev=8b98642002d0506d20628683958cb5c97a0dad80";
-	  flake = false;
-	};
 
 	# Packages not available in home-manager
     purescript-vim.url = "github:purescript-contrib/purescript-vim";
@@ -19,7 +14,7 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, oil, purescript-vim, neovim-release, ... }:
+  outputs = { self, nixpkgs, home-manager, oil, purescript-vim }:
 
     let
       pkgs = import nixpkgs {
@@ -38,7 +33,7 @@
           pkgs = pkgs;
 
           extraSpecialArgs = {
-            inherit system oil purescript-vim neovim-release;
+            inherit system oil purescript-vim;
           };
 
           modules = [
@@ -48,7 +43,7 @@
               home = {
                 username = "nini";
                 homeDirectory = "/home/nini";
-                stateVersion = "23.05";
+                stateVersion = "25.11";
               };
             }
           ];
@@ -64,5 +59,4 @@
       };
 
     };
-
 }
