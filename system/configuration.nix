@@ -7,7 +7,6 @@
     settings.substituters =
       [ "https://cache.nixos.org"
         "https://nix-community.cachix.org"
-        "https://mlabs.cachix.org"
         "https://public-plutonomicon.cachix.org"
       ];
 
@@ -16,7 +15,6 @@
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
         "iohk.cachix.org-1:DpRUyj7h7V830dp/i6Nti+NEO2/nhblbov/8MW7Rqoo="
-        "mlabs.cachix.org-1:gStKdEqNKcrlSQw5iMW6wFCj3+b+1ASpBVY2SYuNV2M="
         "public-plutonomicon.cachix.org-1:3AKJMhCLn32gri1drGuaZmFrmnue+KkKrhhubQk/CWc="
       ];
   };
@@ -24,13 +22,42 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-	  ./greetd.nix
+	  ./configs/greetd.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Enable Plymouth splash screen
+  # Need this to avoid annoying kernel warnings
+  # on the tuigreet login page
+  boot.plymouth = {
+    enable = true;
+    theme = "nixos-bgrt";
+    themePackages = [ pkgs.nixos-bgrt-plymouth ];
+  };
+
+  boot.kernelParams = [
+    "quiet"
+    # ^ Reduce boot messages
+    "loglevel=3"
+    # ^ Only warnings / errors
+    "vt.global_cursor_default=0"
+    # ^ hide console cursor
+  ];
+
+  # For login after sleep
+  security.pam.services.swaylock = {
+    text = ''
+      auth     include login
+      account  include login
+      password include login
+      session  include login
+    '';
+  };
+
+  # Networking
   networking.hostName = "nini";
   networking.networkmanager.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.firewall.enable = true;

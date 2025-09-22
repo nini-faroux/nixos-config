@@ -1,6 +1,6 @@
 # tmux configuration
 
-{ config, lib, pkgs, ... }:
+{ ... }:
 
 { 
   programs.tmux = { 
@@ -44,8 +44,8 @@
       
       set -g allow-rename off
       
-      # log the session 
-      run-shell /opt/tmux-logging/logging.tmux
+      # log the session only if a session exists
+      if-shell "[[ -n \"$TMUX\" ]]" "run-shell /opt/tmux-logging/logging.tmux" ""
       
       set-option -sg escape-time 10
       set-option -g focus-events on
@@ -55,14 +55,11 @@
       # Increase the scrollback buffer size
       set-option history-limit 20000
       
-      # log the session 
-      run-shell /opt/tmux-logging/logging.tmux
-      
       # List of plugins
       set -g @plugin 'tmux-plugins/tpm'
       set -g @plugin 'tmux-plugins/tmux-sensible'
       # Add more plugins below this line
-      
+
       # Run Tmux Plugin Manager
       run '~/.tmux/plugins/tpm/tpm'
     '';

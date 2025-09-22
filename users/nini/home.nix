@@ -1,5 +1,4 @@
 { pkgs, oil, purescript-vim, ... }:
-
 {
   home.username = "nini";
   home.homeDirectory = "/home/nini";
@@ -28,198 +27,210 @@
      ];
   };
 
+  # Installed programs
   home.packages = with pkgs; ([
+      # browsers
 	  brave
-      cachix
       google-chrome
-      git
-      tmux
-      ripgrep
+      
+      # networking
+      networkmanager
+      inetutils
+      protobuf
+	  postman
+      ngrok
+
+      # docker
       docker
       docker-compose
-      glib
-      fd
-      networkmanager
-      htop
-      nodejs
-      gcc
-      gnumake
-      python3
+
+      # nix specific
+      nix-prefetch-git
+      cachix
       direnv
-      ngrok
-      inetutils
-      postgresql
-	  postman
-      rustup
-      llvmPackages.libclang
-      protobuf
-      cabal-install
-      stack
-      yarn
-      docker
-      haskell.compiler.ghc9101
-      mdbook
-      gscreenshot
-      simplescreenrecorder
-      vlc
+
+      # Audio
+	  pulseaudio
       pamixer
       pipewire
-      nix-prefetch-git
+      pavucontrol
+
+      # Video / Images
+      simplescreenrecorder
+      gscreenshot
+      vlc
+
+      # Reading
       kdePackages.okular
       litemdview
+      mdbook
+
+      # Terminal / general progs
+	  alacritty
+      nerd-fonts.jetbrains-mono
       pciutils
+      ripgrep
+      killall
+      git
+      tmux
+      htop
+	  eza
       zip
       unzip
-	  pulseaudio
-	  alacritty
-	  eza
-      nerd-fonts.jetbrains-mono
+	  jq
+      fd
+
+      # Sway specific
+      swayidle
+      swaylock
+
+      # Waybar and related
+      waybar
+      nwg-bar
+
+      # -- Programming languages -- #
+
+      # Haskell
+      haskell.compiler.ghc9101
+      cabal-install
+      stack
+
+      # Python
+      python3
+
+      # C
+      llvmPackages.libclang
+      gnumake
+      glib
+      gcc
+
+      # Assembly
+	  nasm
+	  gdb
+
+      # JavaScript
+      nodejs
+      yarn
+
+      # Rust
+      rustup
+
+      # Postgres
+      postgresql
     ] ++
     [ nil
-    ]);
+    ]
+  );
 
-  programs.zsh = {
-    enable = true;
-    oh-my-zsh = {
-      enable = true;
-      plugins = [
-        "git"
-        "vi-mode"
-      ];
-      theme = "agnoster";
-    };
-    plugins = [
-      { 
-        name = "zsh-syntax-highlighting";
-        src = pkgs.fetchFromGitHub {
-          owner = "zsh-users";
-          repo = "zsh-syntax-highlighting";
-          rev = "caa749d030d22168445c4cb97befd406d2828db0";
-          sha256 = "YV9lpJ0X2vN9uIdroDWEize+cp9HoKegS3sZiSpNk50=";
-        };
-      }
-      {
-        name = "zsh-autosuggestions";
-        src = pkgs.fetchFromGitHub {
-          owner= "zsh-users";
-          repo = "zsh-autosuggestions";
-          rev = "a411ef3e0992d4839f0732ebeb9823024afaaaa8";
-          sha256 = "KLUYpUu4DHRumQZ3w59m9aTW6TBKMCXl2UcKi4uMd7w=";
-        };
-      }
-    ];
-    localVariables = {
-      EDITOR = "vim";
-    };
+  # Waybar config
+  xdg.configFile."waybar/config".source = ./config/waybar/config.jsonc;
+  xdg.configFile."waybar/style.css".source = ./config/waybar/style.css;
 
-    shellAliases = {
-      # cabal
-      cb = "cabal build";
-      ct = "cabal test";
-      # spago
-      sb = "spago build";
-      st = "spago test";
-      stp = "spago test --main Test.Plutip";
-      # rust
-      crb = "cargo build";
-      crt = "cargo test";
-      crn = "cargo new";
-      # make
-      mrb = "make run-build";
-      mrd = "make run-dev-dashboard";
-      mf = "make format";
-      # nix
-	  # Load the zsh shell with flakes
-      nd = "nix develop -c zsh";
-      # nvim
-      nv = "nvim";
-      # git
-      gs = "git status";
-      ga = "git add";
-      # ls
-      ls = "eza";
-    };
-  };
-
-  fonts.fontconfig.enable = true;
-
-  programs.alacritty = {
-    enable = true;
-    settings = {
-      env.TERM = "alacritty";
-      window = {
-        decorations = "full";
-        title = "Alacritty";
-        dynamic_title = true;
-        class = {
-          instance = "Alacritty";
-          general = "Alacritty";
-        };
-      };
-      font = {
-        normal = {
-          family = "JetBrains Mono Nerd Font";
-          style = "Regular";
-        };
-        bold = {
-          family = "JetBrains Mono Nerd Font";
-          style = "Bold";
-        };
-        italic = {
-          family = "JetBrains Mono Nerd Font";
-          style = "Italic";
-        };
-        bold_italic = {
-          family = "JetBrains Mono Nerd Font";
-          style = "regular";
-        };
-        size = 14.00;
-      };
-      colors = {
-        primary = {
-          background = "#1d1f21";
-          foreground = "#c5c8c6";
-        };
-      };
-    };
-  };
-
+  # Sway config
   wayland.windowManager.sway = {
     enable = true;
-	wrapperFeatures.gtk = true;
+      wrapperFeatures.gtk = true;
 
-	config = {
-	  modifier = "Mod4";
-	  terminal = "alacritty";
-	  output = {
+    config = {
+      modifier = "Mod4";
+      terminal = "alacritty";
+      output = {
         eDP-1 = {
           # Set HIDP scale (pixel integer scaling)
           scale = "1";
-	    };
-	  };
-	};
+        };
+      };
+    };
 
-	extraConfig = ''
-	  # Brightness
+    # Remove default swaybar
+    config.bars = [];
+
+    extraConfig = ''
+      # Set the super key
+      set $mod Mod4
+
+      ### ─── Create workspaces and run certain apps on boot ────────────────────
+
+      ## - Browser at workspace 1 - ##
+      workspace 1
+
+      # Launch Brave
+      exec brave
+
+      # All brave windows to workspace 1 with stacking layout
+      for_window [app_id="brave-browser"] move to workspace 1, layout stacking
+
+      ## - Haskell projects at workspace 2 - ##
+      workspace 2
+
+      # Launch terminal on ws 2 in haskell dir running tmux
+      exec alacritty --working-directory ~/dev/haskell -e tmux new-session -A -s haskell -c ~/dev/haskell
+
+      ## - Dotfiles at workspace 4 -##
+      workspace 4
+
+      # Launch terminal on workspace 4 in dotfiles dir running tmux
+      exec alacritty --working-directory ~/.dotfiles -e tmux new-session -A -s dotfiles -c ~/.dotfiles
+
+      # --- Htop Scratchpad Setup ---
+
+      # Start htop in its own terminal
+      exec alacritty --class htop -e htop
+      
+      # Send it to the scratchpad and make it floating
+      for_window [app_id="htop"] move to scratchpad, floating enable, resize set width 800 height 600, move position center
+      
+      # Unbind from default
+      unbindsym $mod+h
+
+      # Show or hide the htop scratchpad window from anywhere
+      bindsym $mod+h [app_id="htop"] scratchpad show
+
+      # --------- #
+
+      # Hide cursor when not moving it
+      seat seat0 hide_cursor 10000
+
+      # Brightness
       bindsym XF86MonBrightnessDown exec light -U 10
       bindsym XF86MonBrightnessUp exec light -A 10
 
       # Volume
-	  bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+      bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
       bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
       bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 
-	  input "type:keyboard" {
-		xkb_layout gb
-	    xkb_options "ctrl:nocaps"
-	  }
+      # Keyboard and touchpad
+      input "type:keyboard" {
+        xkb_layout gb
+        xkb_options "ctrl:nocaps"
+      }
 
-	  input "type:touchpad" {
-	    tap enabled
-	  }
-	'';
+      input "type:touchpad" {
+        tap enabled
+      }
+
+      # Waybar
+      exec_always waybar
+
+      # --- Wallpaper ---
+      output * bg "${./config/image/wallpaper_1.jpg}" fill
+
+      # --- Go to lock page when idle for a while
+      exec swayidle -w \
+        timeout 300 "swaylock -f -i ${./config/image/wallpaper_1.jpg}" \
+        timeout 600 "swaymsg 'output * dpms off'" \
+        resume "swaymsg 'output * dpms on'"
+    '';
   };
 
+  # Enable FontConfig (needed for jetbrains fonts)
+  fonts.fontconfig.enable = true;
+
+  # Have external alacritty config instead of using programs.alcritty
+  xdg.configFile."alacritty/alacritty.toml".source = ./config/alacritty/alacritty.toml;
+
+  # Style mouse pointer
   home.pointerCursor = {
     gtk.enable = true;
     package = pkgs.bibata-cursors;
@@ -227,83 +238,12 @@
     size = 20;
   };
 
-  programs.neovim =
-    let
-       toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
-    in 
-    {
-      enable = true;
-
-      viAlias = true;
-      vimAlias = true; vimdiffAlias = true; extraLuaConfig = ''
-        ${builtins.readFile ./config/nvim/lua/options.lua}
-      '';
-
-      extraPackages = with pkgs; [
-		luajitPackages.lua-lsp
-	    lua-language-server
-		nodePackages.typescript
-		nodePackages.typescript-language-server
-	  ];
-
-      plugins = with pkgs.vimPlugins; [
-	    {
-	      plugin = nvim-lspconfig;
-	      config = toLuaFile ./config/nvim/lua/plugin/lsp.lua;
-	    }
-
-		tokyonight-nvim
-
-		{
-		  plugin = nvim-treesitter;
-		  config = toLuaFile ./config/nvim/lua/plugin/treesitter.lua;
-		}
-
-	    cmp_luasnip
-	    luasnip
-
-        cmp-nvim-lsp
-        neodev-nvim
-
-        nvim-cmp 
-        {
-          plugin = nvim-cmp;
-          config = toLuaFile ./config/nvim/lua/plugin/cmp.lua;
-        }
-
-	    {
-	      plugin = telescope-nvim;
-	      config = toLuaFile ./config/nvim/lua/plugin/telescope.lua;
-	    }
-
-		{
-		  plugin = pkgs.vimPlugins.own-oil;
-		  config = toLuaFile ./config/nvim/lua/plugin/oil.lua;
-		}
-
-		own-purescript-vim
-     ];
-
-    };
-
-  programs.bat = {
-    enable = true;
-    config = {
-      theme = "TwoDark";
-      pager = "less - FR";
-    };
-  };
-
-  programs.obs-studio = {
-    enable = true;
-    plugins = with pkgs.obs-studio-plugins; [
-      wlrobs
-      obs-backgroundremoval
-      obs-pipewire-audio-capture
-    ];
-  };
-
+  # Import external nix configs
   imports = [
       ./config/tmux/tmux.nix
+      ./config/zsh/zsh.nix
+      ./config/nvim/nvim.nix
+      ./config/bat/bat.nix
+      ./config/obs-studio/obs-studio.nix
   ];
 }

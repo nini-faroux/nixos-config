@@ -1,5 +1,9 @@
 -- LSP Configs --
 
+-- ensure lspconfig loads
+local ok, lspconfig = pcall(require, "lspconfig")
+if not ok then return end
+
 local on_attach = function(_, bufnr)
 
   local bufmap = function(keys, func)
@@ -65,21 +69,13 @@ capabilities.textDocument.semanticTokens = {
 
 -- Set a custom color for Haskell function declarations
 vim.api.nvim_set_hl(0, "@function.haskell", { fg = "#ffffff", bold = true })
-vim.api.nvim_set_hl(0, "@function.call.haskell", { fg = "#ffffff" })  -- for function *calls*
+vim.api.nvim_set_hl(0, "@function.call.haskell", { fg = "#f4415f" })  -- for function *calls*
 
 -- Optional: highlight type declarations
 vim.api.nvim_set_hl(0, "@type.haskell", { fg = "#ffffff", italic = true })
 
 -- Override the comment color (and optionally styling)
 vim.api.nvim_set_hl(0, "Comment", { fg = "#b4f9f8", italic = true })
-
--- semantic tokens highlight groups
--- vim.api.nvim_set_hl(0, "LspSemanticFunction", { link = "Function" })
--- vim.api.nvim_set_hl(0, "LspSemanticVariable", { link = "Identifier" })
--- vim.api.nvim_set_hl(0, "LspSemanticType",     { link = "Type" })
--- vim.api.nvim_set_hl(0, "LspSemanticConstructor", { link = "Constructor" })
--- vim.api.nvim_set_hl(0, "LspSemanticKeyword",  { link = "Keyword" })
--- vim.api.nvim_set_hl(0, "LspSemanticComment",  { link = "Comment" })
 
 -- Lua lsp
 require('neodev').setup()
@@ -99,9 +95,17 @@ require('lspconfig').lua_ls.setup {
 }
 
 -- PureScript lsp
-require'lspconfig'.purescriptls.setup{
-  on_attach = on_attach,
-  capabilities = capabilities,
+lspconfig.purescriptls.setup {
+  cmd = { "purescript-language-server", "--stdio" },
+  filetypes = { "purescript" },
+  -- Detect project root via spago.yaml
+  root_dir = lspconfig.util.root_pattern("spago.yaml", "flake.nix"),
+  settings = {
+    purescript = {
+      addSpagoSources = true,
+      addNpmPath = true,
+    },
+  },
 }
 
 -- Haskell lsp
@@ -140,3 +144,22 @@ require('lspconfig').nil_ls.setup {
     },
   },
 }
+
+-- C lsp
+require('lspconfig').clangd.setup{}
+
+-- Python lsp
+require('lspconfig').pyright.setup {
+  on_attach = on_attach,
+  settings = {
+    python = {
+      analysis = {
+        typeCheckingMode = "basic",
+        autoSearchPaths = true,
+        useLibraryCodeForTypes = true,
+      },
+    },
+  },
+}
+
+require('lspconfig').ruff.setup{}
