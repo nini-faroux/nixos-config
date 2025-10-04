@@ -52,13 +52,27 @@
       # Audio
 	  pulseaudio
       pamixer
-      pipewire
       pavucontrol
+      pipewire
 
-      # Video / Images
+      # Screencast capture
+      grim
+      # ^ Screenshot tool
+      slurp
+      # ^ Region selection for screenshots / screencasts
+
+      # Portals for apps (Chrome etc.) to capture screen
+      xdg-desktop-portal
+
+      # Wayland screen recorder
+      wf-recorder
+
+      # Video player
+      vlc
+
+      # Screenshots
       simplescreenrecorder
       gscreenshot
-      vlc
 
       # Reading
       kdePackages.okular
@@ -152,7 +166,7 @@
       ### ─── Create workspaces and run certain apps on boot ────────────────────
 
       ## - Browser at workspace 1 - ##
-      workspace 1
+      workspace 1 output DP-1
 
       # Launch Brave
       exec brave
@@ -161,16 +175,22 @@
       for_window [app_id="brave-browser"] move to workspace 1, layout stacking
 
       ## - Haskell projects at workspace 2 - ##
-      workspace 2
+      workspace 2 output DP-1
+
+      # Match by Alacritty app_id and send it to workspace 2
+      for_window [app_id="haskell-term"] move to workspace 2
 
       # Launch terminal on ws 2 in haskell dir running tmux
-      exec alacritty --working-directory ~/dev/haskell -e tmux new-session -A -s haskell -c ~/dev/haskell
+      exec alacritty --class haskell-term --working-directory ~/dev/haskell -e tmux new-session -A -s haskell -c ~/dev/haskell
 
       ## - Dotfiles at workspace 4 -##
       workspace 4
 
+      # Match by Alacritty app_id and send it to workspace 4
+      for_window [app_id="dotfiles-term"] move to workspace 4
+
       # Launch terminal on workspace 4 in dotfiles dir running tmux
-      exec alacritty --working-directory ~/.dotfiles -e tmux new-session -A -s dotfiles -c ~/.dotfiles
+      exec alacritty --class dotfiles-term --working-directory ~/.dotfiles -e tmux new-session -A -s dotfiles -c ~/.dotfiles
 
       # --- Htop Scratchpad Setup ---
 
@@ -188,8 +208,11 @@
 
       # --------- #
 
+      # Ensures DBus knows about sway environment (needed for xdg-desktop-portal-wlr)
+      exec_always dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+
       # Hide cursor when not moving it
-      seat seat0 hide_cursor 10000
+      seat seat0 hide_cursor 20000
 
       # Brightness
       bindsym XF86MonBrightnessDown exec light -U 10
@@ -221,6 +244,7 @@
         timeout 300 "swaylock -f -i ${./config/image/wallpaper_1.jpg}" \
         timeout 600 "swaymsg 'output * dpms off'" \
         resume "swaymsg 'output * dpms on'"
+
     '';
   };
 

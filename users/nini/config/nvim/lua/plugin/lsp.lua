@@ -162,4 +162,14 @@ require('lspconfig').pyright.setup {
   },
 }
 
-require('lspconfig').ruff.setup{}
+-- Rust lsp
+lspconfig.rust_analyzer.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  settings = {
+    ["rust-analyzer"] = {
+      cargo = { allFeatures = true },
+      checkOnSave = { command = "clippy" },
+    },
+  },
+}

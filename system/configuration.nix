@@ -1,5 +1,4 @@
-{ config, pkgs, ... }:
-
+{ pkgs, ... }:
 {
   nix = {
     extraOptions= "extra-experimental-features = nix-command flakes ca-derivations";
@@ -77,9 +76,28 @@
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
+    pulse.enable = true;
+    jack.enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
-    pulse.enable = true;
+  };
+
+  # Needed for desktop-portal apparently
+  services.xserver.enable = true;
+
+  # Enable XDG desktop portals
+  xdg.portal.config = {
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-wlr
+      pkgs.xdg-desktop-portal-gtk
+    ];
+    configPackages = [
+      pkgs.xdg-desktop-portal-wlr
+    ];
+    config = {
+      common.default = [ "wlr" "gtk" ];
+    };
   };
 
   # wayland stuff
@@ -114,6 +132,12 @@
   environment.systemPackages = with pkgs; [
     vim
     wget
+
+    # Portals for apps (Chrome etc.) to capture screen
+    # Need to be installed system wide
+    xdg-desktop-portal
+    xdg-desktop-portal-wlr
+    xdg-desktop-portal-gtk
   ];
 
   # This value determines the NixOS release from which the default
@@ -123,5 +147,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "21.11"; # Did you read the comment?
-
 }
