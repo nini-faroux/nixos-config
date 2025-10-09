@@ -108,6 +108,7 @@
       haskell.compiler.ghc9101
       cabal-install
       stack
+      hlint
 
       # Python
       python3

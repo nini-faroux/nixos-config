@@ -78,24 +78,25 @@ vim.api.nvim_set_hl(0, "@type.haskell", { fg = "#ffffff", italic = true })
 vim.api.nvim_set_hl(0, "Comment", { fg = "#b4f9f8", italic = true })
 
 -- Lua lsp
-require('neodev').setup()
-require('lspconfig').lua_ls.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-	root_dir = function()
-        return vim.loop.cwd()
-    end,
-	cmd = { "lua-lsp" },
-    settings = {
-        Lua = {
-            workspace = { checkThirdParty = false },
-            telemetry = { enable = false },
-        },
+vim.lsp.enable('luals')
+vim.lsp.config['luals'] = {
+  cmd = { 'lua-language-server' },
+  on_attach = on_attach,
+  filetypes = { 'lua' },
+  -- Sets the "workspace" to the directory where any of these files is found.
+  root_markers = { { '.luarc.json', '.luarc.jsonc' }, '.git' },
+  settings = {
+    Lua = {
+      runtime = {
+        version = 'LuaJIT',
+      }
     }
+  }
 }
 
 -- PureScript lsp
-lspconfig.purescriptls.setup {
+vim.lsp.enable('purescriptls')
+vim.lsp.config['purescriptls'] = {
   cmd = { "purescript-language-server", "--stdio" },
   filetypes = { "purescript" },
   -- Detect project root via spago.yaml
@@ -109,7 +110,8 @@ lspconfig.purescriptls.setup {
 }
 
 -- Haskell lsp
-require'lspconfig'.hls.setup{
+vim.lsp.enable('hls')
+vim.lsp.config['hls'] = {
   on_attach = on_attach,
   capabilities = capabilities,
   settings = {
@@ -126,13 +128,16 @@ require'lspconfig'.hls.setup{
 }
 
 -- TypeScript lsp
-require('lspconfig')['ts_ls'].setup{
+vim.lsp.enable('ts_ls')
+vim.lsp.config['ts_ls'] = {
   on_attach = on_attach,
 }
 
 -- Nix lsp
-require('lspconfig').nil_ls.setup {
+vim.lsp.enable('nil_ls')
+vim.lsp.config['nil_ls'] = {
   autostart = true,
+  on_attach = on_attach,
   capabilities = caps,
   cmd = { "/nix/store/77rg4vvvrc4xx5h2ia1qmy9inajnsq8i-home-manager-path/bin/nil" },
   settings = {
@@ -146,10 +151,12 @@ require('lspconfig').nil_ls.setup {
 }
 
 -- C lsp
-require('lspconfig').clangd.setup{}
+vim.lsp.enable('clangd')
+vim.lsp.config['clangd'] = {}
 
 -- Python lsp
-require('lspconfig').pyright.setup {
+vim.lsp.enable('pyright')
+vim.lsp.config['pyright'] = {
   on_attach = on_attach,
   settings = {
     python = {
@@ -163,7 +170,8 @@ require('lspconfig').pyright.setup {
 }
 
 -- Rust lsp
-lspconfig.rust_analyzer.setup {
+vim.lsp.enable('rust_analyzer')
+vim.lsp.config['rust_analyzer'] = {
   on_attach = on_attach,
   capabilities = capabilities,
   settings = {
