@@ -101,6 +101,7 @@
       # Waybar and related
       waybar
       nwg-bar
+      fuzzel
 
       # -- Programming languages -- #
 
@@ -144,7 +145,7 @@
   # Sway config
   wayland.windowManager.sway = {
     enable = true;
-      wrapperFeatures.gtk = true;
+    wrapperFeatures.gtk = true;
 
     config = {
       modifier = "Mod4";
@@ -164,16 +165,41 @@
       # Set the super key
       set $mod Mod4
 
-      ### ─── Create workspaces and run certain apps on boot ────────────────────
-
+      ### ---- Create workspaces and run certain apps on boot ---- ###
       ## - Browser at workspace 1 - ##
       workspace 1 output DP-1
 
       # Launch Brave
-      exec brave
+      exec brave --ozone-platform-hint=wayland \
+                 --enable-features=UseOzonePlatform,WebRTCPipeWireCapturer,WaylandWindowDecorations
 
-      # All brave windows to workspace 1 with stacking layout
-      for_window [app_id="brave-browser"] move to workspace 1, layout stacking
+      # Make Brave windows tabbed on workspace 1
+      for_window [app_id="brave-browser"] move to workspace 1, layout tabbed
+
+      # ---- Browser Appearance ---- #
+
+      # General gaps and border style
+      gaps inner 5
+      gaps outer 5
+      default_border pixel 1
+      default_floating_border none
+      font pango:JetBrainsMono Nerd Font 10
+
+      # ---- Browser Tab Colors ---- #
+      client.focused          #282828 #458588 #ebdbb2 #458588 #ebdbb2
+      client.focused_inactive #3c3836 #928374 #ebdbb2 #928374 #ebdbb2
+      client.unfocused        #3c3836 #504945 #a89984 #504945 #a89984
+      client.urgent           #cc241d #cc241d #fbf1c7 #cc241d #fbf1c7
+
+      # --- Move between tabs in stacked layout
+      bindsym $mod+n focus next
+      bindsym $mod+p focus prev
+
+      # --- Fuzzel menu for Brave windows ---
+      bindsym $mod+m exec ~/.config/sway/scripts/brave-switcher.sh
+
+      # --- Toggle Fuzzel Menu ---
+      bindsym $mod+Shift+m exec fuzzel
 
       ## - Haskell projects at workspace 2 - ##
       workspace 2 output DP-1
@@ -265,10 +291,12 @@
 
   # Import external nix configs
   imports = [
-      ./config/tmux/tmux.nix
-      ./config/zsh/zsh.nix
-      ./config/nvim/nvim.nix
-      ./config/bat/bat.nix
-      ./config/obs-studio/obs-studio.nix
+    ./config/tmux/tmux.nix
+    ./config/zsh/zsh.nix
+    ./config/nvim/nvim.nix
+    ./config/fuzzel/fuzzel.nix
+    ./config/fuzzel/fuzzel-script.nix
+    ./config/bat/bat.nix
+    ./config/obs-studio/obs-studio.nix
   ];
 }
