@@ -8,7 +8,7 @@
 
   settings = {
     default_session.command = ''
-      sh -c 'clear && ${pkgs.greetd.tuigreet}/bin/tuigreet \
+      sh -c 'clear && ${pkgs.tuigreet}/bin/tuigreet \
         --time \
         --user-menu \
         --cmd sway \

@@ -46,6 +46,15 @@
     # ^ hide console cursor
   ];
 
+  # For suspending after closing lid
+  # Also allows for triggering lockscreen via swayidle
+  services.logind.settings.Login = {
+    HandleLidSwitch = "suspend";
+    HandleLidSwitchExternalPower = "suspend";
+    HandleLidSwitchDocked = "ignore";
+    # ^ Don't suspend when docked with external monitor
+  };
+
   # For login after sleep
   security.pam.services.swaylock = {
     text = ''

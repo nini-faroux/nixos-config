@@ -25,13 +25,9 @@
       };
 
       colors = {
-        # Background color (ARGB or hex)
         background = "222222ff";
-        # Foreground text color
         foreground = "bbbbbbff";
-        # Selected item background
         selected_bg = "285577ff";
-        # Selected item foreground
         selected_fg = "ffffffff";
       };
 
