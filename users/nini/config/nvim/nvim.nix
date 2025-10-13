@@ -16,9 +16,11 @@
     	# Lua lsp
     	luajitPackages.lua-lsp
         lua-language-server
+
     	# TypeScript lsp
     	nodePackages.typescript
     	nodePackages.typescript-language-server
+
     	# Python lsp
     	pyright
     	ruff
@@ -39,6 +41,7 @@
     	}
 
         nvim-treesitter-parsers.haskell
+        nvim-treesitter-parsers.purescript
     	nvim-treesitter-parsers.python
 
         cmp_luasnip
@@ -63,7 +66,6 @@
     	  config = toLuaFile ./lua/plugin/oil.lua;
     	}
   
-    	own-purescript-vim
      ];
   
     };

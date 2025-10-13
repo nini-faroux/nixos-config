@@ -7,26 +7,26 @@
 
     // Modules order
     "modules-left": [
-        "custom/apps",
-        "sway/workspaces",
-        "sway/window"
+      "custom/apps",
+      "sway/workspaces",
+      "sway/window"
     ],
     "modules-center": [
     ],
     "modules-right": [
-        "cpu",
-        "memory",
-        "pulseaudio",
-        "network",
-        "battery",
-        "clock"
+      "cpu",
+      "memory",
+      "network",
+      "custom/volume",
+      "battery",
+      "clock"
     ],
 
     // Modules config
     "clock": {
-        "timezone": "Europe/Dublin",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
+      "timezone": "Europe/Dublin",
+      "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+      "format-alt": "{:%Y-%m-%d}"
     },
     "cpu": { 
       "interval": 10, 
@@ -38,42 +38,30 @@
         "RAM: {used:0.1f}GiB/{total:0.1f}GiB ({percentage}%) SWAP: {swapUsed:0.1f}GiB/{swapTotal:0.1f}GiB ({swapPercentage}%)"
     },
     "battery": {
-        "states": {
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{capacity}% {icon}",
-        "format-full": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
-        "format-alt": "{time} {icon}",
-        "format-icons": ["", "", "", "", ""]
+      "states": {
+          "warning": 30,
+          "critical": 15
+      },
+      "format": "{capacity}% {icon}",
+      "format-full": "{capacity}% {icon}",
+      "format-charging": "{capacity}% ",
+      "format-plugged": "{capacity}% ",
+      "format-alt": "{time} {icon}",
+      "format-icons": ["", "", "", "", ""]
     },
     "network": {
-        "format-wifi": "{essid} ",
-        "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip-format": "{ifname} via {gwaddr} ",
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ⚠",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+      "format-wifi": "{essid} ",
+      "format-ethernet": "{ipaddr}/{cidr} ",
+      "tooltip-format": "{ifname} via {gwaddr} ",
+      "format-linked": "{ifname} (No IP) ",
+      "format-disconnected": "Disconnected ⚠",
+      "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
-    "pulseaudio": {
-        "format": "{volume}% {icon}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
-        "format-source": "{volume}% ",
-        "format-source-muted": "",
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
-        },
-        "on-click": "pavucontrol"
+    // One liner is a bit messy but doesn't allow multi-line it seems
+    "custom/volume": {
+        "exec": "volume=$(pamixer --get-volume); muted=$(pamixer --get-mute); if [ \"$muted\" = true ]; then echo \"0% 🔇\"; elif [ $volume -ge 70 ]; then echo \"$volume% 🔊\"; elif [ $volume -ge 30 ]; then echo \"$volume% 🔉\"; else echo \"$volume% 🔈\"; fi",
+      "interval": 1,
+      "on-click": "pavucontrol",
+      "format": "{}"
     }
- }
 }

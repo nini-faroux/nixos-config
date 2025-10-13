@@ -54,28 +54,14 @@
 @define-color white #ebdbb2;
 @define-color orange #d65d0e;
 
-/* Modules */
-@define-color bg @background;
-@define-color fg @foreground;
-@define-color ws-focused-bg @red;
-@define-color ws-focused-fg @black;
-@define-color audio-bg @blue;
-@define-color audio-fg @black;
-@define-color network-bg @magenta;
-@define-color network-fg @black;
-@define-color battery-bg @green;
-@define-color battery-fg @black;
-@define-color clock-bg @cyan;
-@define-color clock-bg @black;
-
 * {
     font-family: "Fira Sans, Iosevka Nerd Font";
     font-size: 14px;
 }
 
 window#waybar {
-    background-color: @bg;
-    color: @fg;
+    background-color: @background;
+    color: @foreground;
     border-bottom: none;
     transition-property: background-color;
     transition-duration: .5s;
@@ -107,7 +93,7 @@ button:hover {
     padding: 0 10px;
     background-color: transparent;
     border-radius: 4px;
-    color: @fg;
+    color: @foreground;
     border-radius: 4px;
 }
 
@@ -116,8 +102,8 @@ button:hover {
 }
 
 #workspaces button.focused {
-    background-color: @ws-focused-bg;
-    color: @ws-focused-fg;
+    background-color: @red;
+    color: @black;
 }
 
 #workspaces button.urgent {
@@ -136,15 +122,14 @@ button:hover {
 #disk,
 #temperature,
 #network,
-#pulseaudio,
+#custom-volume,
 #mode,
 #power-profiles-daemon,
 #mpd {
-    padding: 0 10px;
-    border-radius: 4px;
-    color: #ffffff;
+  padding: 0 10px;
+  border-radius: 4px;
+  color: #ffffff;
 }
-
 #window,
 #workspaces {
     margin: 0 4px;
@@ -161,13 +146,13 @@ button:hover {
 }
 
 #clock {
-    background-color: @clock-bg;
-    color: @clock-fg;
+    background-color: @black;
+    color: @white;
 }
 
 #battery {
-    background-color: @battery-bg;
-    color: @battery-fg;
+    background-color: @green;
+    color: @black;
 }
 
 @keyframes blink {
@@ -189,25 +174,25 @@ button:hover {
 }
 
 #network {
-    background-color: @network-bg;
-    color: @network-fg;
+    background-color: @blue;
+    color: @black;
 }
 
 #network.disconnected {
     background-color: @red;
 }
 
-#pulseaudio {
-    background-color: @audio-bg;
-    color: @audio-fg;
+#custom-volume {
+    background-color: @magenta;
+    color: @black;
 }
 
 #cpu {
-    background-color: @audio-bg;
-    color: @audio-fg;
+    background-color: @blue;
+    color: @black;
 }
 
 #memory {
-    background-color: @audio-bg;
-    color: @audio-fg;
+    background-color: @blue;
+    color: @black;
 }

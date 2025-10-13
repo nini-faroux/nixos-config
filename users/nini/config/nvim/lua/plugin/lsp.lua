@@ -1,7 +1,7 @@
 -- LSP Configs --
 
 -- ensure lspconfig loads
-local ok, lspconfig = pcall(require, "lspconfig")
+local ok = pcall(require, "lspconfig")
 if not ok then return end
 
 local on_attach = function(_, bufnr)
@@ -95,12 +95,13 @@ vim.lsp.config['luals'] = {
 }
 
 -- PureScript lsp
-vim.lsp.enable('purescriptls')
-vim.lsp.config['purescriptls'] = {
+-- This only seems to work with the old require API
+-- So have to keep it like this with the annoying warning for now
+require('lspconfig').purescriptls.setup {
   cmd = { "purescript-language-server", "--stdio" },
+  on_attach = on_attach,
   filetypes = { "purescript" },
-  -- Detect project root via spago.yaml
-  root_dir = lspconfig.util.root_pattern("spago.yaml", "flake.nix"),
+  root_dir = require('lspconfig.util').root_pattern("spago.yaml", "flake.nix"),
   settings = {
     purescript = {
       addSpagoSources = true,

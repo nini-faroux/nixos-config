@@ -1,4 +1,4 @@
-{ pkgs, oil, purescript-vim, ... }:
+{ pkgs, oil, ... }:
 {
   home.username = "nini";
   home.homeDirectory = "/home/nini";
@@ -16,11 +16,6 @@
              name = "nvimtree";
              src = oil;
            };
-
-		   own-purescript-vim = prev.vimUtils.buildVimPlugin {
-		     name = "purescriptvim";
-			 src = purescript-vim;
-		   };
 
          };
        })

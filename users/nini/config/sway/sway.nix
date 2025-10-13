@@ -95,10 +95,10 @@
       bindsym XF86MonBrightnessDown exec light -U 10
       bindsym XF86MonBrightnessUp exec light -A 10
 
-      # Volume
-      bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-      bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-      bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+      # Volume controls with pamixer (limit at 100%)
+      bindsym XF86AudioMute exec pamixer --toggle-mute
+      bindsym XF86AudioRaiseVolume exec pamixer --increase 5 --set-limit 100
+      bindsym XF86AudioLowerVolume exec pamixer --decrease 5
 
       # Keyboard and touchpad
       input "type:keyboard" {
