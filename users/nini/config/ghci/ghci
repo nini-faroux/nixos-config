@@ -1,0 +1,8 @@
+:set -fprint-unicode-syntax
+:set prompt "λ> "
+:set +m
+:set -XOverloadedStrings
+
+:set prompt-cont " | "
+:set editor vim
+:module + Data.Maybe

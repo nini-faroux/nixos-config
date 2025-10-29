@@ -16,6 +16,11 @@ vim.o.number = true
 -- Always show sign column (empty if no signs)
 vim.o.signcolumn = 'yes'
 
+-- Shortcut for jumping to the next window, nicer for hovering
+vim.keymap.set('n', 'W', '<C-w>w', { desc = 'Jump to next window' })
+-- Shortcut for jumping back to the previous window
+vim.keymap.set('n', 'WW', '<C-w>p', { desc = 'Jump back to previous window' })
+
 -- Tabs / Spaces
 vim.o.tabstop = 4
 -- How many spaces to use for indent

@@ -85,6 +85,7 @@
     tmux
     htop
 	eza
+    tree
     zip
     unzip
 	jq
@@ -127,6 +128,9 @@
     # Rust
     rustup
 
+    # Prolog
+    swi-prolog
+
     # Postgres
     postgresql
     ] ++
@@ -159,6 +163,9 @@
 
     # Nvim
     ./config/nvim/nvim.nix
+
+    # ghci
+    ./config/ghci/ghci.nix
 
     # Fuzzel (app launch and active browser tabs script)
     ./config/fuzzel/fuzzel.nix

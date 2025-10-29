@@ -37,6 +37,7 @@
     shellAliases = {
       # cabal
       cb = "cabal build";
+      crwd = "cabal repl --with-compiler=doctest";
       ct = "cabal test";
       # spago
       sb = "spago build";
