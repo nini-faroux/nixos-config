@@ -103,7 +103,7 @@
     # -- Programming languages -- #
 
     # Haskell
-    haskell.compiler.ghc9101
+    haskell.compiler.ghc912
     cabal-install
     stack
     hlint
