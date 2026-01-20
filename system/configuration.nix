@@ -69,6 +69,7 @@
   networking.hostName = "nini";
   networking.networkmanager.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.firewall.enable = true;
+  networking.firewall.checkReversePath = false;
 
   # Enable for docker daemon
   virtualisation.docker.enable = true;
@@ -141,6 +142,13 @@
   environment.systemPackages = with pkgs; [
     vim
     wget
+
+    # VPN
+    wireguard-tools
+    protonvpn-gui
+
+    # GTK for launching GUI apps too
+    gtk3
 
     # Portals for apps (Chrome etc.) to capture screen
     # Need to be installed system wide

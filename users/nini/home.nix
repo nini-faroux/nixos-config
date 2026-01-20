@@ -27,6 +27,7 @@
     # browsers
 	brave
     google-chrome
+    firefox
     
     # networking
     networkmanager
@@ -71,7 +72,6 @@
 
     # Reading
     kdePackages.okular
-    litemdview
     mdbook
 
     # Terminal / general progs

@@ -1,4 +1,4 @@
-require('nvim-treesitter.configs').setup {
+require('nvim-treesitter').setup {
     ensure_installed = { 'haskell', 'vim', 'vimdoc', 'lua' },
 
     auto_install = false,
