@@ -1,5 +1,5 @@
 require('nvim-treesitter').setup {
-    ensure_installed = { 'haskell', 'vim', 'vimdoc', 'lua' },
+    ensure_installed = { 'haskell', 'vim', 'vimdoc', 'lua', 'markdown', 'markdown_inline', 'yaml' },
 
     auto_install = false,
 

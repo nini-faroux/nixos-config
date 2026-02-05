@@ -28,6 +28,9 @@
 	brave
     google-chrome
     firefox
+
+    # Editors
+    # zed-editor
     
     # networking
     networkmanager

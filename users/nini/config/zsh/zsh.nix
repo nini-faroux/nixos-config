@@ -2,6 +2,7 @@
 {
   programs.zsh = {
     enable = true;
+
     oh-my-zsh = {
       enable = true;
       plugins = [
@@ -10,6 +11,14 @@
       ];
       theme = "agnoster";
     };
+
+    # Use for API keys
+    initExtra = ''
+      if [ -f "$HOME/.secrets/env.sh" ]; then
+        source "$HOME/.secrets/env.sh"
+      fi
+    '';
+
     plugins = [
       { 
         name = "zsh-syntax-highlighting";

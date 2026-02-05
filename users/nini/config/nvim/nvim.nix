@@ -60,6 +60,11 @@
           plugin = telescope-nvim;
           config = toLuaFile ./lua/plugin/telescope.lua;
         }
+
+        {
+          plugin = codecompanion-nvim;
+          config = toLuaFile ./lua/plugin/codecompanion.lua;
+        }
   
     	{
     	  plugin = pkgs.vimPlugins.own-oil;
