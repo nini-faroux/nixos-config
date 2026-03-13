@@ -29,9 +29,6 @@
     google-chrome
     firefox
 
-    # Editors
-    # zed-editor
-    
     # networking
     networkmanager
     inetutils
@@ -82,6 +79,7 @@
     nerd-fonts.jetbrains-mono
     pciutils
     ripgrep
+    fzf
     killall
     lsof
     git
