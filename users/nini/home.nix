@@ -165,6 +165,9 @@
     # Nvim
     ./config/nvim/nvim.nix
 
+    # nix-direnv
+    ./config/direnv/direnv.nix
+
     # ghci
     ./config/ghci/ghci.nix
 
