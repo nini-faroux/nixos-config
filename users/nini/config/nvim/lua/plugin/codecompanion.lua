@@ -1,55 +1,32 @@
--- Patch the real anthropic adapter BEFORE CodeCompanion uses it
-local anthropic = require("codecompanion.adapters.http.anthropic")
-
-anthropic.url = "http://localhost:8080/v1/messages"
-anthropic.api_key = "dummy"
-
 require("codecompanion").setup({
-  adapter = "anthropic",
+  adapters = {
+    -- Override the built-in 'openai' adapter to point to proxy
+    openai = function()
+      return require("codecompanion.adapters").extend("openai", {
+        url = "http://127.0.0.1:8080/v1/gemini/completions",
+        env = { api_key = "dummy" },
+        -- model = "gemini-2.0-flash",
+        model= "gemini-1.5-flash",
+      })
+    end,
 
-  interactions = {
+    -- Keep anthropic as is
+    anthropic = function()
+      return require("codecompanion.adapters").extend("anthropic", {
+        url = "http://localhost:8080/v1/messages",
+        env = { api_key = "dummy" },
+      })
+    end,
+  },
+  strategies = {
     chat = {
-      adapter = "anthropic",
-      model = "claude-sonnet-4-20250514",
+      adapter = "openai", -- Point to the overridden 'openai' adapter
     },
     inline = {
-      adapter = "anthropic",
+      adapter = "openai",
     },
   },
-
   opts = {
     log_level = "DEBUG",
   },
 })
-
--- require("codecompanion").setup({
---   interactions = {
---     chat = {
---       adapter = "anthropic_proxy",
---       model = "claude-sonnet-4-20250514",
---     },
---     inline = {
---       adapter = "anthropic_proxy",
---     },
---   },
--- 
---   adapters = {
---     anthropic_proxy = function()
---       return require("codecompanion.adapters").extend("anthropic", {
---         url = "http://localhost:8080/v1/messages",
---         api_key = "dummy",
---       })
---     end,
--- 
---     openai_proxy = function()
---       return require("codecompanion.adapters").extend("openai", {
---         url = "http://localhost:8080/v1/responses",
---         api_key = "dummy",
---       })
---     end,
---   },
--- 
---   opts = {
---     log_level = "DEBUG",
---   },
--- })

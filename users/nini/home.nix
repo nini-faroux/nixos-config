@@ -51,6 +51,9 @@
     pavucontrol
     pipewire
 
+    # LLMs
+    aider-chat
+
     # Screencast capture
     grim
     # ^ Screenshot tool
@@ -180,5 +183,8 @@
 
     # obs studio config
     ./config/obs-studio/obs-studio.nix
+
+    # aider
+    ./config/aider/aider.nix
   ];
 }

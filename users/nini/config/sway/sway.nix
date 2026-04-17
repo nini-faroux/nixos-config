@@ -51,15 +51,6 @@
       # --- Toggle Fuzzel Menu ---
       bindsym $mod+Shift+m exec fuzzel
 
-      ## - Haskell projects at workspace 2 - ##
-      workspace 2 output DP-1
-
-      # Match by Alacritty app_id and send it to workspace 2
-      for_window [app_id="haskell-term"] move to workspace 2
-
-      # Launch terminal on ws 2 in haskell dir running tmux
-      exec alacritty --class haskell-term --working-directory ~/dev/haskell -e tmux new-session -A -s haskell -c ~/dev/haskell
-
       ## - Dotfiles at workspace 4 -##
       workspace 4 output DP-1
 

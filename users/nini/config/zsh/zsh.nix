@@ -44,30 +44,41 @@
     };
   
     shellAliases = {
+      # run aider with llama model - the most reliable way to force the flags
+      aider-llama-architect = "aider --model openai/Meta-Llama-3.1-405B-Instruct --alias openai/Meta-Llama-3.1-405B-Instruct:gpt-4o";
+      aider-llama-code = "aider --model openai/Meta-Llama-3.1-405B-Instruct --alias openai/Meta-Llama-3.1-405B-Instruct:gpt-4o --auto-accept-architect";
+
       # cabal
       cb = "cabal build";
       crwd = "cabal repl --with-compiler=doctest";
       ct = "cabal test";
+
       # spago
       sb = "spago build";
       st = "spago test";
       stp = "spago test --main Test.Plutip";
+
       # rust
       crb = "cargo build";
       crt = "cargo test";
       crn = "cargo new";
+
       # make
       mrb = "make run-build";
       mrd = "make run-dev-dashboard";
       mf = "make format";
+
       # nix
-  	# Load the zsh shell with flakes
+      # Load the zsh shell with flakes
       nd = "nix develop -c zsh";
+
       # nvim
       nv = "nvim";
+
       # git
       gs = "git status";
       ga = "git add";
+
       # ls
       ls = "eza";
     };
