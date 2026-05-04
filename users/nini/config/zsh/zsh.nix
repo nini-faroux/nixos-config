@@ -13,7 +13,7 @@
     };
 
     # Use for API keys
-    initExtra = ''
+    initContent = ''
       if [ -f "$HOME/.secrets/env.sh" ]; then
         source "$HOME/.secrets/env.sh"
       fi
@@ -71,6 +71,8 @@
       # nix
       # Load the zsh shell with flakes
       nd = "nix develop -c zsh";
+      # Need nightly for miri
+      ndm = "nix develop .#nightly -c zsh";
 
       # nvim
       nv = "nvim";

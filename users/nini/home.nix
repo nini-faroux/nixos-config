@@ -44,6 +44,7 @@
     nix-prefetch-git
     cachix
     direnv
+    nh
 
     # Audio
 	pulseaudio
@@ -52,7 +53,7 @@
     pipewire
 
     # LLMs
-    aider-chat
+    aider-chat-with-playwright
 
     # Screencast capture
     grim
@@ -94,6 +95,7 @@
     unzip
 	jq
     fd
+    psmisc
 
     # Sway specific
     swayidle

@@ -7,13 +7,13 @@
     enable = true;
     extraArgs = [ "-w" ];
     events = [
-      { event = "before-sleep"; command = "${pkgs.swaylock}/bin/swaylock -f -i ${../image/lockscreen_wallpaper.jpg}"; }
-      { event = "lock"; command = "${pkgs.swaylock}/bin/swaylock -f -i ${../image/lockscreen_wallpaper.jpg}"; }
+      { event = "before-sleep"; command = "${pkgs.swaylock}/bin/swaylock -f -i ${../image/a_bridge_with_clouds_in_the_sky.jpg}"; }
+      { event = "lock"; command = "${pkgs.swaylock}/bin/swaylock -f -i ${../image/a_bridge_with_clouds_in_the_sky.jpg}"; }
     ];
     timeouts = [
-      { timeout = 300; command = "${pkgs.swaylock}/bin/swaylock -f -i ${../image/lockscreen_wallpaper.jpg}"; }
+      { timeout = 300; command = "${pkgs.swaylock}/bin/swaylock -f -i ${../image/a_bridge_with_clouds_in_the_sky.jpg}"; }
       { timeout = 600; command = ''swaymsg "output * dpms off"''; resumeCommand = ''swaymsg "output * dpms on"''; }
     ];
-    systemdTarget = "sway-session.target";
+    systemdTargets = [ "sway-session.target" ];
   };
 }

@@ -118,9 +118,6 @@
   security.polkit.enable = true;
   hardware.graphics.enable = true;
 
-  # enable brightness
-  programs.light.enable = true;
-
   # Optimise storage
   nix.settings.auto-optimise-store = true;
 

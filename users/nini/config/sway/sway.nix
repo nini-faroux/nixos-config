@@ -51,15 +51,6 @@
       # --- Toggle Fuzzel Menu ---
       bindsym $mod+Shift+m exec fuzzel
 
-      ## - Dotfiles at workspace 4 -##
-      workspace 4 output DP-1
-
-      # Match by Alacritty app_id and send it to workspace 4
-      for_window [app_id="dotfiles-term"] move to workspace 4
-
-      # Launch terminal on workspace 4 in dotfiles dir running tmux
-      exec alacritty --class dotfiles-term --working-directory ~/.dotfiles -e tmux new-session -A -s dotfiles -c ~/.dotfiles
-
       # --- Htop Scratchpad Setup ---
 
       # Start htop in its own terminal
